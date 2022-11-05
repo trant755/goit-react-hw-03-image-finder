@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const ButtonSC = styled.button`
   margin-left: auto;
@@ -32,3 +33,8 @@ export const Button = ({ text, onClick }) => (
     {text}
   </ButtonSC>
 );
+
+Button.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  text: PropTypes.string.isRequired,
+};

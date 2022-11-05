@@ -1,5 +1,6 @@
 import { ImageGalleryItem } from './ImageGalleryItem';
 import * as SC from './ImageGallery.styled';
+import PropTypes from 'prop-types';
 
 export const ImageGallery = ({ images }) => (
   <SC.ImageGallery>
@@ -13,3 +14,7 @@ export const ImageGallery = ({ images }) => (
     ))}
   </SC.ImageGallery>
 );
+
+ImageGallery.propTypes = {
+  images: PropTypes.arrayOf(PropTypes.object),
+};

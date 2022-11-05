@@ -1,6 +1,7 @@
 import * as SC from './Searchbar.styled';
 import { MdOutlineImageSearch } from 'react-icons/md';
 import { Formik } from 'formik';
+import PropTypes from 'prop-types';
 
 export const Searchbar = ({ onSubmit }) => (
   <SC.Searchbar>
@@ -23,3 +24,7 @@ export const Searchbar = ({ onSubmit }) => (
     </Formik>
   </SC.Searchbar>
 );
+
+Searchbar.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
