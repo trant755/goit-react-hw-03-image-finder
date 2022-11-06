@@ -14,5 +14,5 @@ export const imageFetch = async (serch, page) => {
       per_page: 12,
     },
   });
-  return response.data.hits;
+  return response.data;
 };

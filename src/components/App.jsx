@@ -10,6 +10,7 @@ export class App extends Component {
   state = {
     searchQuery: '',
     page: 1,
+    maxPages: 1,
     foundPictures: [],
     error: false,
     isLoad: false,
@@ -25,8 +26,11 @@ export class App extends Component {
           this.state.searchQuery,
           this.state.page
         );
+
+        const maxPages = Math.ceil(newImgs.totalHits / 12);
         this.setState(prevState => ({
-          foundPictures: [...prevState.foundPictures, ...newImgs],
+          foundPictures: [...prevState.foundPictures, ...newImgs.hits],
+          maxPages: maxPages,
           isLoad: false,
         }));
       } catch (error) {
@@ -42,6 +46,7 @@ export class App extends Component {
         return {
           searchQuery: search,
           page: 1,
+          maxPages: 1,
           foundPictures: [],
           isLoad: true,
         };
@@ -56,13 +61,14 @@ export class App extends Component {
     }));
 
   render() {
-    const pictures = this.state.foundPictures;
+    const state = this.state;
+    const pictures = state.foundPictures;
     return (
       <Box display="grid" gridTemplateColumns="1fr" gridGap="16px" pb="24px">
         <Searchbar onSubmit={this.SubmitImgForm} />
         <ImageGallery images={pictures} />
         {this.state.isLoad && <Loader />}
-        {pictures.length > 0 && (
+        {state.page !== state.maxPages && (
           <Button text={'Load more'} onClick={this.HandleLoadMore} />
         )}
       </Box>
